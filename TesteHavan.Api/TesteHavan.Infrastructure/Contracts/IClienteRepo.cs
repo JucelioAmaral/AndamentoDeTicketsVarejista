@@ -9,6 +9,7 @@ namespace TesteHavan.Infrastructure.Contracts
 {
     public interface IClienteRepo
     {
-        Task<Cliente>SalvaCliente(Cliente cliente);     
+        Task<Cliente>SalvaClienteAsync(Cliente cliente);
+        Task<Cliente>VerificaTicketsDoClienteAsync(int idCliente);
     }
 }

@@ -14,11 +14,13 @@ namespace TesteHavan.Controllers
     [Route("[controller]")]
     public class TicketController : ControllerBase
     {
-        private readonly ITicketService _ticketService;
+        private readonly ITicketService _ticketService;        
+        private readonly ITicketSituacaoService _ticketSitService;
 
-        public TicketController(ITicketService ticketService)
+        public TicketController(ITicketService ticketService, ITicketSituacaoService ticketSitService)
         {
-            _ticketService = ticketService;
+            _ticketService = ticketService;            
+            _ticketSitService = ticketSitService;
         }
 
         [HttpPost("CriaTicket")]
@@ -26,9 +28,9 @@ namespace TesteHavan.Controllers
         {
             try
             {
-                if("Em andamento" == await _ticketService.VerificaSitucaoTicket(model.IdSituacao))
+                if ("Em andamento" == await _ticketSitService.VerificaSitucaoDosTicketsDoCliente(model.IdSituacao))
                 {
-                    return BadRequest($"Ticket {model.Codigo} está com o status Em andamento.");
+                    return BadRequest($"O cliente com o Id {model.IdCliente} tem ticket com status Em andamento.");
                 }
                 else
                 {
@@ -41,7 +43,7 @@ namespace TesteHavan.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar adicionar o cliente. Erro: {ex.Message}");
+                    $"Erro ao tentar adicionar o ticket. Erro: {ex.Message}");
             }
         }
 

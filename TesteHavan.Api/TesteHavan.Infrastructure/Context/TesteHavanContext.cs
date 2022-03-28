@@ -29,8 +29,5 @@ namespace TesteHavan.Infrastructure.Context
         }
 
         public void Dispose() => Connection?.Dispose();
-
-
-
     }
 }

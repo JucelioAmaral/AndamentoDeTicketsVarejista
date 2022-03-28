@@ -8,10 +8,8 @@ using TesteHavan.Application.Dtos;
 namespace TesteHavan.Application.Contracts
 {
     public interface ITicketService
-    {        
-        Task<string> VerificaSitucaoTicket(int idTicketSituacao);
-        Task<TicketDto> AdicionaTicket(TicketDto model);
-        Task<TicketDto> AtualizaTicket(TicketDto model);
+    {     
+        Task<TicketDto> AdicionaTicket(TicketDto model);        
         Task<bool> ConcluiTicket(TicketDto model);
     }
 }

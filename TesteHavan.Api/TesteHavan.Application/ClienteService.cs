@@ -29,7 +29,7 @@ namespace TesteHavan.Application
             try
             {
                 var cliente = _mapper.Map<Cliente>(model);
-                var clienteAdded = await _clienteRepo.SalvaCliente(cliente);
+                var clienteAdded = await _clienteRepo.SalvaClienteAsync(cliente);
                 if (clienteAdded == null)
                 {
                     return null;

@@ -1,6 +1,4 @@
-﻿
-
-using Dapper;
+﻿using Dapper;
 using System.Threading.Tasks;
 using TesteHavan.Domain;
 using TesteHavan.Infrastructure.Context;
@@ -17,15 +15,27 @@ namespace TesteHavan.Infrastructure
             _context = context;
         }
 
-        public async Task<string> VerificaSitucaoTicketDB(int idTicketSituacao)
+        public async Task<Ticket> AdicionaTicketAsync(Ticket ticket)
         {
-            using (var conn = _context.Connection)
+            var conn = _context.Connection;
+
+            using (conn)
             {
-                string query = @"SELECT * FROM TicketSituacao WHERE Id = @idTicketSituacao";
-                TicketSituacao ticketSituacao = await conn.QueryFirstOrDefaultAsync<TicketSituacao>
-                    (sql: query, param: new { idTicketSituacao });
-                return ticketSituacao.Nome;
+                string command = @"INSERT INTO Ticket(IdUsuarioAbertura, IdUsuarioConclusao, IdCliente, IdSituacao, Codigo, DataAbertura, DataConclusao) 
+                                              VALUES(@IdUsuarioAbertura, @IdUsuarioConclusao, @IdCliente, @IdSituacao, NEXT VALUE FOR SQ_TicketHAVAN_SQL, @DataAbertura, @DataConclusao)";
+
+                var result = await conn.ExecuteAsync(sql: command, param: ticket);                
+                if (result > 0)
+                {
+                    return ticket;
+                }
+                return null;
             }
+        }
+
+        public async Task<bool> ConcluiTicketAsync(int idTicket)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

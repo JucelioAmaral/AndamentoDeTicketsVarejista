@@ -11,8 +11,7 @@ namespace TesteHavan.Application.Dtos
         public int IdUsuarioAbertura { get; set; }
         public int IdUsuarioConclusao { get; set; }     
         public int IdCliente { get; set; }        
-        public int IdSituacao { get; set; }        
-        public int Codigo { get; set; }
+        public int IdSituacao { get; set; }                
         public DateTime? DataAbertura { get; set; }
         public DateTime? DataConclusao { get; set; }
     }

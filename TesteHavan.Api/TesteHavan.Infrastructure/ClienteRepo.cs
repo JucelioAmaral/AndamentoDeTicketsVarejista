@@ -19,7 +19,7 @@ namespace TesteHavan.Infrastructure
             _context = context;
         }
 
-        public async Task<Cliente> SalvaCliente(Cliente cliente)
+        public async Task<Cliente> SalvaClienteAsync(Cliente cliente)
         {
             using (var conn = _context.Connection)
             {
@@ -32,6 +32,11 @@ namespace TesteHavan.Infrastructure
                 }
                 return null;
             }
+        }
+
+        public Task<Cliente> VerificaTicketsDoClienteAsync(int idCliente)
+        {
+            throw new NotImplementedException();
         }
     }
 }
