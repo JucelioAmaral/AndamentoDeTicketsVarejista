@@ -17,9 +17,7 @@ namespace TesteHavan.Infrastructure
 
         public async Task<Ticket> AdicionaTicketAsync(Ticket ticket)
         {
-            var conn = _context.Connection;
-
-            using (conn)
+            using (var conn = _context.Connection)
             {
                 string command = @"INSERT INTO Ticket(IdUsuarioAbertura, IdUsuarioConclusao, IdCliente, IdSituacao, Codigo, DataAbertura, DataConclusao) 
                                               VALUES(@IdUsuarioAbertura, @IdUsuarioConclusao, @IdCliente, @IdSituacao, NEXT VALUE FOR SQ_TicketHAVAN_SQL, @DataAbertura, @DataConclusao)";

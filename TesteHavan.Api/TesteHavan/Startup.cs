@@ -36,7 +36,8 @@ namespace TesteHavan
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<TesteHavanContext>();            
+            //AddTransient => Solução para todas as vezes que chamar o "Connection" do context (TesteHavanContext) pois, todas as conexões solicitadas após a primeira, o "Connection" vinha como null.
+            services.AddTransient<TesteHavanContext>();            
 
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
