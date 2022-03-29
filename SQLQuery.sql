@@ -110,7 +110,7 @@ T.DataConclusao,
 C.Codigo AS CodigoDoCliente,
 C.CPF,
 TS.Nome AS TicketSitucao,
-U.Codigo,
+U.Codigo AS CodigoDoUsuario,
 U.Nome AS NomedoUsuario,
 COUNT(TA.IdTicket) AS QtdeAnotaçõesTicket
 FROM Ticket T
@@ -128,9 +128,10 @@ AND C.CPF = @cpf
 GROUP BY T.Id,T.IdUsuarioAbertura,T.IdUsuarioConclusao,T.IdCliente,T.IdSituacao,T.Codigo,T.DataAbertura,T.DataConclusao,C.Codigo,C.CPF,TS.Nome,U.Codigo,U.Nome 
 )
 
-----CONSULTA DA FUNCTION FN_DADOS_HAVAN
---SELECT * FROM FN_DADOS_HAVAN (2, 'Ana','12345678910')
 */
+----CONSULTA DA FUNCTION FN_DADOS_HAVAN
+SELECT * FROM FN_DADOS_HAVAN (2, 'Ana','12345678910')
+
 
 --------------------------------------------------------------------------------------------
 

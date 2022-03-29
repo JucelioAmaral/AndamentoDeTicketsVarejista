@@ -45,12 +45,14 @@ namespace TesteHavan
             services.AddScoped<ITicketService, TicketService>();
             services.AddScoped<ITicketSituacaoService, TicketSituacaoService>();
             services.AddScoped<ITicketAnotacoesService, TicketAnotacoesService>();
+            services.AddScoped<IViewBDService, ViewBDService>();
 
             services.AddScoped<IClienteRepo, ClienteRepo>();
             services.AddScoped<IUsuarioRepo, UsuarioRepo>();
             services.AddScoped<ITicketRepo, TicketRepo>();
             services.AddScoped<ITicketSituacaoRepo, TicketSituacaoRepo>();
             services.AddScoped<ITicketAnotacoesRepo, TicketAnotacoesRepo>();
+            services.AddScoped<IViewRepo, ViewRepo>();
 
             services.AddSwaggerGen(c =>
             {
