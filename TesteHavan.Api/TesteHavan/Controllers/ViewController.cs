@@ -11,7 +11,7 @@ using TesteHavan.Application.Dtos;
 
 namespace TesteHavan.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ViewController : ControllerBase
