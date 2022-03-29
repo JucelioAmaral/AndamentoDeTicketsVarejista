@@ -27,7 +27,7 @@ namespace TesteHavan.Infrastructure
             using (conn)
             {
                 conn.Open();
-                string command = @"INSERT INTO TicketAnotacao(IdTicket, IdUsuario, Texto, Data) VALUES(@IdTicket, @IdUsuario, @Texto, @Data)";
+                string command = @"INSERT INTO TicketAnotacao(IdTicket, IdUsuario, Texto, Data) VALUES(@IdTicket, @IdUsuario, @Texto, GETDATE())";
 
                 var result = await conn.ExecuteAsync(sql: command, param: ticketComAnotacoes);
                 if (result > 0)

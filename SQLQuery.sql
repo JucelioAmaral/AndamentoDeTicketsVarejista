@@ -1,3 +1,5 @@
+/*
+
 CREATE DATABASE DbTesteHavan
 
 use DbTesteHavan
@@ -81,3 +83,147 @@ CREATE SEQUENCE [dbo].[SQ_TicketHAVAN_SQL]
 	INCREMENT BY 1
 	NO CACHE
 GO
+
+*/
+
+/*
+------------------------
+--CRIAÇÃO DA FUNCTION
+
+use DbTesteHavan
+go
+
+CREATE FUNCTION FN_DADOS_HAVAN (@codigo varchar(8), @nome varchar(128),@cpf varchar(11))
+RETURNS TABLE
+AS
+RETURN
+(
+SELECT
+T.Id,
+T.IdUsuarioAbertura,
+T.IdUsuarioConclusao,
+T.IdCliente,
+T.IdSituacao,
+T.Codigo AS CodigoDoTicket,
+T.DataAbertura,
+T.DataConclusao,
+C.Codigo AS CodigoDoCliente,
+C.CPF,
+TS.Nome AS TicketSitucao,
+U.Codigo,
+U.Nome AS NomedoUsuario,
+COUNT(TA.IdTicket) AS QtdeAnotaçõesTicket
+FROM Ticket T
+INNER JOIN Cliente C
+ON (T.IdCliente = C.Id)
+INNER JOIN TicketSituacao TS
+ON (T.IdSituacao = TS.Id)
+INNER JOIN Usuario U
+ON (T.IdUsuarioAbertura = U.Id)
+INNER JOIN TicketAnotacao TA
+ON (T.Id = TA.IdTicket)
+WHERE T.Codigo = @codigo
+AND U.Nome = @nome
+AND C.CPF = @cpf
+GROUP BY T.Id,T.IdUsuarioAbertura,T.IdUsuarioConclusao,T.IdCliente,T.IdSituacao,T.Codigo,T.DataAbertura,T.DataConclusao,C.Codigo,C.CPF,TS.Nome,U.Codigo,U.Nome 
+)
+
+----CONSULTA DA FUNCTION FN_DADOS_HAVAN
+--SELECT * FROM FN_DADOS_HAVAN (2, 'Ana','12345678910')
+*/
+
+--------------------------------------------------------------------------------------------
+
+/*
+------------------------
+--CRIAÇÃO DA VIEW
+
+use DbTesteHavan
+go
+
+
+--DECLARE @codigo varchar(8)= 2
+--DECLARE @nome varchar(128)= 'Ana'
+--DECLARE @cpf varchar(11)= '12345678910'
+
+CREATE VIEW VW_DADOS_HAVAN
+AS
+SELECT
+T.Id,
+T.IdUsuarioAbertura,
+T.IdUsuarioConclusao,
+T.IdCliente,
+T.IdSituacao,
+T.Codigo AS CodigoDoTicket,
+T.DataAbertura,
+T.DataConclusao,
+C.Codigo AS CodigoDoCliente,
+C.CPF,
+TS.Nome AS TicketSitucao,
+U.Codigo,
+U.Nome AS NomedoUsuario,
+COUNT(TA.IdTicket) AS QtdeAnotaçõesTicket
+FROM Ticket T
+INNER JOIN Cliente C
+ON (T.IdCliente = C.Id)
+INNER JOIN TicketSituacao TS
+ON (T.IdSituacao = TS.Id)
+INNER JOIN Usuario U
+ON (T.IdUsuarioAbertura = U.Id)
+INNER JOIN TicketAnotacao TA
+ON (T.Id = TA.IdTicket)
+WHERE T.Codigo = 2
+AND U.Nome = 'Ana'
+AND C.CPF = '12345678910'
+GROUP BY T.Id,T.IdUsuarioAbertura,T.IdUsuarioConclusao,T.IdCliente,T.IdSituacao,T.Codigo,T.DataAbertura,T.DataConclusao,C.Codigo,C.CPF,TS.Nome,U.Codigo,U.Nome 
+
+----CONSULTA DA VIEW
+--SELECT * FROM VW_DADOS_HAVAN
+*/
+
+/*
+------------------------
+--CRIAÇÃO DA PROCEDURE
+
+use DbTesteHavan
+go
+
+CREATE PROCEDURE SP_DADOS_HAVAN
+@codigo varchar(8),
+@nome varchar(128),
+@cpf varchar(11)
+AS
+SELECT
+T.Id,
+T.IdUsuarioAbertura,
+T.IdUsuarioConclusao,
+T.IdCliente,
+T.IdSituacao,
+T.Codigo,
+T.DataAbertura,
+T.DataConclusao,
+C.Codigo,
+C.CPF,
+TS.Nome AS TicketSitucao,
+U.Codigo,
+U.Nome AS NomedoUsuario,
+COUNT(TA.IdTicket) AS QtdeAnotaçõesTicket
+FROM Ticket T
+INNER JOIN Cliente C
+ON (T.IdCliente = C.Id)
+INNER JOIN TicketSituacao TS
+ON (T.IdSituacao = TS.Id)
+INNER JOIN Usuario U
+ON (T.IdUsuarioAbertura = U.Id)
+INNER JOIN TicketAnotacao TA
+ON (T.Id = TA.IdTicket)
+WHERE T.Codigo = @codigo
+AND U.Nome = @nome
+AND C.CPF = @cpf
+GROUP BY T.Id,T.IdUsuarioAbertura,T.IdUsuarioConclusao,T.IdCliente,T.IdSituacao,T.Codigo,T.DataAbertura,T.DataConclusao,C.Codigo,C.CPF,TS.Nome,U.Codigo,U.Nome 
+
+
+----CONSULTA DA PROCEDURE SP_DADOS_HAVAN
+--EXEC SP_DADOS_HAVAN @codigo= 2, @nome = 'Ana', @cpf= '12345678910'
+
+*/
