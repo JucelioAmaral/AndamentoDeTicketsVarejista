@@ -9,6 +9,8 @@ namespace TesteHavan.Infrastructure.Contracts
 {
     public interface ITicketRepo
     {        
-        Task<Ticket> AdicionaTicketAsync(Ticket ticket);        
+        Task<Ticket> AdicionaTicketAsync(Ticket ticket);
+        Task<int> AtualizaTicketSitucaoAsync(Ticket ticket);
+        Task<Ticket> GetTicketAsync(int idTicket);
     }
 }

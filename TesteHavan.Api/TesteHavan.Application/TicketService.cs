@@ -14,13 +14,13 @@ namespace TesteHavan.Application
     public class TicketService : ITicketService
     {
         private readonly IMapper _mapper;
-        private readonly ITicketRepo _ticketRepo;       
-        
+        private readonly ITicketRepo _ticketRepo;
+
 
         public TicketService(IMapper mapper, ITicketRepo ticketRepo, ITicketSituacaoRepo ticketSitRepo)
         {
             _mapper = mapper;
-            _ticketRepo = ticketRepo;            
+            _ticketRepo = ticketRepo;
         }
 
         public async Task<TicketDto> AdicionaTicket(TicketDto model)
@@ -44,10 +44,39 @@ namespace TesteHavan.Application
             }
         }
 
-        public async Task<bool> ConcluiTicket(TicketDto model)
+        public async Task<bool> ConcluiTicketSitucaoDoCliente(Ticket ticket)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (await _ticketRepo.AtualizaTicketSitucaoAsync(ticket) > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
+        public async Task<Ticket> GetTicket(int IdTicket)
+        {
+            try
+            {
+                var ticketReturn = await _ticketRepo.GetTicketAsync(IdTicket);
+                if (ticketReturn == null) return null;
+
+                return ticketReturn;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

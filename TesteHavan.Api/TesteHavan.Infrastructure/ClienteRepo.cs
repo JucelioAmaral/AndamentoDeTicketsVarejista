@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,15 +22,20 @@ namespace TesteHavan.Infrastructure
 
         public async Task<Cliente> SalvaClienteAsync(Cliente cliente)
         {
-            using (var conn = _context.Connection)
+            IDbConnection conn = _context.GetConnection();
+
+            using (conn)
             {
+                conn.Open();
                 string command = @"INSERT INTO Cliente(Codigo, CPF) VALUES(@Codigo, @CPF)";
 
                 var result = await conn.ExecuteAsync(sql: command, param: cliente);
                 if (result > 0)
                 {
+                    conn.Close();
                     return cliente;
                 }
+                conn.Close();
                 return null;
             }
         }

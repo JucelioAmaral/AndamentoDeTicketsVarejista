@@ -11,7 +11,7 @@ using TesteHavan.Domain;
 
 namespace TesteHavan.Infrastructure.Context
 {
-    public class TesteHavanContext : IDisposable
+    public class TesteHavanContext
     {
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
@@ -19,15 +19,18 @@ namespace TesteHavan.Infrastructure.Context
         public DbSet<TicketAnotacao> TicketAnotacao { get; set; }
         public DbSet<TicketSituacao> TicketSituacao { get; set; }
 
-        public IDbConnection Connection { get; }
+        static string connectionString;
 
         public TesteHavanContext(IConfiguration configuration)
         {
-            Connection = new SqlConnection(configuration
-                     .GetConnectionString("DefaultConnection"));
-            Connection.Open();
+            connectionString = configuration
+                     .GetConnectionString("DefaultConnection").ToString();
+
         }
 
-        public void Dispose() => Connection?.Dispose();
+        public IDbConnection GetConnection()
+        {
+            return new SqlConnection(connectionString);
+        }
     }
 }

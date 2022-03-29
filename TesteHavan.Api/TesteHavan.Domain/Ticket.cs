@@ -13,7 +13,7 @@ namespace TesteHavan.Domain
         public int IdSituacao { get; set; }        
         public TicketSituacao TicketSituacao { get; set; }
         public int Codigo { get; set; }
-        public DateTime? DataAbertura { get; set; }
-        public DateTime? DataConclusao { get; set; }
+        public DateTime DataAbertura { get; set; }
+        public DateTime DataConclusao { get; set; }
     }
 }

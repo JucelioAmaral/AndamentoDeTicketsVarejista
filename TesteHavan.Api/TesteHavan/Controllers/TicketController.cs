@@ -46,5 +46,25 @@ namespace TesteHavan.Controllers
                     $"Erro ao tentar adicionar o ticket. Erro: {ex.Message}");
             }
         }
+
+
+        [HttpPut("ConcluiTicket/{IdTicket}")]
+        public async Task<IActionResult> ConcluiTicket(int IdTicket)
+        {
+            try
+            {
+                var ticket = await _ticketService.GetTicket(IdTicket);
+                var result = await _ticketService.ConcluiTicketSitucaoDoCliente(ticket);
+                if (result == false) return NoContent();
+
+                return Ok($"Ticket Id {IdTicket} concluído ");
+
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar Atualizar situação do ticket. Erro: {ex.Message}");
+            }
+        }
     }
 }

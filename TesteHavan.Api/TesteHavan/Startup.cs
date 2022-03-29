@@ -36,7 +36,8 @@ namespace TesteHavan
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            //AddTransient => Solução para todas as vezes que chamar o "Connection" do context (TesteHavanContext) pois, todas as conexões solicitadas após a primeira, o "Connection" vinha como null.
+            //AddTransient => Parte da Solução para todas as vezes que chamar o "Connection" do context (TesteHavanContext) pois, todas as conexões solicitadas após a primeira, o "Connection" vinha como null.
+            //Outra parte foi a chamada, abertura e fechamento da conexão dentro de cada método que precisa da conexão com o BD.
             services.AddTransient<TesteHavanContext>();            
 
             services.AddScoped<IClienteService, ClienteService>();

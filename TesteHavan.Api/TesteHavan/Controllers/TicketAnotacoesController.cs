@@ -14,11 +14,11 @@ namespace TesteHavan.Controllers
     [Route("[controller]")]
     public class TicketAnotacoesController : ControllerBase
     {
-        private readonly ITicketAnotacoesService _ticketAnotervice;        
+        private readonly ITicketAnotacoesService _ticketAnotService;        
 
         public TicketAnotacoesController(ITicketAnotacoesService ticketAnotervice)
         {
-            _ticketAnotervice = ticketAnotervice;            
+            _ticketAnotService = ticketAnotervice;            
         }
 
         [HttpPost("AnotacoesTicket")]
@@ -26,7 +26,7 @@ namespace TesteHavan.Controllers
         {
             try
             {             
-                var anotacoesInfoTicket = await _ticketAnotervice.AnotaInfoTicket(model);
+                var anotacoesInfoTicket = await _ticketAnotService.AnotaInfoTicket(model);
                 if (anotacoesInfoTicket == null) return NoContent();
 
                 return Ok(anotacoesInfoTicket);
@@ -35,7 +35,7 @@ namespace TesteHavan.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar adicionar o ticket. Erro: {ex.Message}");
+                    $"Erro ao tentar adicionar anotações de ticket. Erro: {ex.Message}");
             }
         }
     }
