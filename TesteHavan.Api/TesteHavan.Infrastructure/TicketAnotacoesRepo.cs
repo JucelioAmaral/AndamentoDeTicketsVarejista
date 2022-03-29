@@ -10,25 +10,25 @@ using TesteHavan.Infrastructure.Contracts;
 
 namespace TesteHavan.Infrastructure
 {
-    public class ClienteRepo : IClienteRepo
+    public class TicketAnotacoesRepo : ITicketAnotacoesRepo
     {
         private readonly TesteHavanContext _context;
 
-        public ClienteRepo(TesteHavanContext context)
+        public TicketAnotacoesRepo(TesteHavanContext context)
         {
             _context = context;
         }
 
-        public async Task<Cliente> SalvaClienteAsync(Cliente cliente)
+        public async Task<TicketAnotacao> SalvaAnotacoesAsync(TicketAnotacao ticketComAnotacoes)
         {
             using (var conn = _context.Connection)
             {
-                string command = @"INSERT INTO Cliente(Codigo, CPF) VALUES(@Codigo, @CPF)";
+                string command = @"INSERT INTO TicketAnotacao(IdTicket, IdUsuario, Texto, Data) VALUES(@IdTicket, @IdUsuario, @Texto, @Data)";
 
-                var result = await conn.ExecuteAsync(sql: command, param: cliente);
+                var result = await conn.ExecuteAsync(sql: command, param: ticketComAnotacoes);
                 if (result > 0)
                 {
-                    return cliente;
+                    return ticketComAnotacoes;
                 }
                 return null;
             }

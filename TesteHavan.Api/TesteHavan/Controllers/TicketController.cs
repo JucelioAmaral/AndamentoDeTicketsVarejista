@@ -46,17 +46,5 @@ namespace TesteHavan.Controllers
                     $"Erro ao tentar adicionar o ticket. Erro: {ex.Message}");
             }
         }
-
-        [HttpPut("AtualizaTicket")]
-        public async Task<IActionResult> AtualizaTicket()
-        {
-            return null;
-        }
-
-        [HttpPut("ConcluiTicket")]
-        public async Task<IActionResult> ConcluiTicket()
-        {
-            return null;
-        }
     }
 }

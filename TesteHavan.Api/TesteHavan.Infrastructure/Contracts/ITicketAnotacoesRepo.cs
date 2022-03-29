@@ -7,8 +7,8 @@ using TesteHavan.Domain;
 
 namespace TesteHavan.Infrastructure.Contracts
 {
-    public interface IClienteRepo
+    public interface ITicketAnotacoesRepo
     {
-        Task<Cliente>SalvaClienteAsync(Cliente cliente);        
+        Task<TicketAnotacao> SalvaAnotacoesAsync(TicketAnotacao ticketComAnotacoes);
     }
 }

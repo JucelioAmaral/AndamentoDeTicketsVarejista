@@ -13,6 +13,7 @@ namespace TesteHavan.Application
             CreateMap<Usuario, UsuarioDto>().ReverseMap();
             CreateMap<Cliente, ClienteDto>().ReverseMap();
             CreateMap<Ticket, TicketDto>().ReverseMap();
+            CreateMap<TicketAnotacao, TicketAnotDto>().ReverseMap();            
         }
     }
 }

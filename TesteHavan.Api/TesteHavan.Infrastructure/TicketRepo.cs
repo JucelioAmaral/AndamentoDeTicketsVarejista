@@ -30,10 +30,5 @@ namespace TesteHavan.Infrastructure
                 return null;
             }
         }
-
-        public async Task<bool> ConcluiTicketAsync(int idTicket)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
