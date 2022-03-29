@@ -11,8 +11,9 @@ using TesteHavan.Application.Dtos;
 
 namespace TesteHavan.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ClienteController : ControllerBase
     {
         private readonly IClienteService _clienteService;
