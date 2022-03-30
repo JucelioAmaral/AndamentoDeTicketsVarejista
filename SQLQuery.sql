@@ -85,7 +85,6 @@ CREATE SEQUENCE [dbo].[SQ_TicketHAVAN_SQL]
 GO
 
 
-
 ----CONSULTA NA SEQUENCE
 SELECT cache_size, current_value   
 FROM sys.sequences  
