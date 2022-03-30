@@ -11,7 +11,7 @@ using TesteHavan.Application.Dtos;
 
 namespace TesteHavan.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
@@ -24,7 +24,6 @@ namespace TesteHavan.Controllers
         }
 
         [HttpPost("AdicionaUsuario")]
-        [AllowAnonymous]
         public async Task<IActionResult> AdicionaUsuario(UsuarioDto model )
         {
             try

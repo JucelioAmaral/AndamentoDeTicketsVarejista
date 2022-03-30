@@ -11,7 +11,7 @@ using TesteHavan.Application.Dtos;
 
 namespace TesteHavan.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class TicketAnotacoesController : ControllerBase
@@ -23,7 +23,7 @@ namespace TesteHavan.Controllers
             _ticketAnotService = ticketAnotervice;            
         }
 
-        [HttpPost("AnotacoesTicket")]
+        [HttpPost("TicketAnotacoes")]
         public async Task<IActionResult> TicketAnotacoes(TicketAnotDto model)
         {
             try

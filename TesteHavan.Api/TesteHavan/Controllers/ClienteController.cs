@@ -11,7 +11,7 @@ using TesteHavan.Application.Dtos;
 
 namespace TesteHavan.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ClienteController : ControllerBase
@@ -23,8 +23,7 @@ namespace TesteHavan.Controllers
             _clienteService = clienteService;
         }
 
-        [HttpPost("AdicionaCliente")]
-        [AllowAnonymous]
+        [HttpPost("AdicionaCliente")]        
         public async Task<IActionResult> AdicionaCliente(ClienteDto model )
         {
             try
